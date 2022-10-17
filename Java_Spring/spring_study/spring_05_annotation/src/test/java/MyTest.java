@@ -5,7 +5,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class MyTest {
     public static void main(String[] args) {
         ApplicationContext applicationContext = new ClassPathXmlApplicationContext("applicationContext.xml");
-        User user = applicationContext.getBean("user",User.class);
+        User user = applicationContext.getBean("user1",User.class);
         System.out.println(user.name);
     }
 }
