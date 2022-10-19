@@ -15,6 +15,8 @@
         <module>spring_04_autowired</module>
         <module>spring_05_annotation</module>
         <module>spring_06_appconfig</module>
+        <module>spring_08_proxy</module>
+        <module>spring_09_aop</module>
     </modules>
     <dependencies>
         <!-- https://mvnrepository.com/artifact/org.springframework/spring-webmvc -->
@@ -29,7 +31,11 @@
             <version>4.13.2</version>
             <scope>test</scope>
         </dependency>
-
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>1.9.9</version>
+        </dependency>
     </dependencies>
 
     <properties>
