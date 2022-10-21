@@ -17,6 +17,7 @@
         <module>spring_06_appconfig</module>
         <module>spring_08_proxy</module>
         <module>spring_09_aop</module>
+        <module>spring_10_Mybatis</module>
     </modules>
     <dependencies>
         <!-- https://mvnrepository.com/artifact/org.springframework/spring-webmvc -->
