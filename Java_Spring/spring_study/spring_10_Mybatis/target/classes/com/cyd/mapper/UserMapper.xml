@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!--UserMapper mapper-->
 <mapper namespace="com.cyd.mapper.UserMapper">
-    <select id="selectUser" resultType="user">
+    <select id="selectUser" resultType="User">
         select * from mybatis.user;
     </select>
 </mapper>

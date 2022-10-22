@@ -10,6 +10,7 @@
         <module name="spring_10_Mybatis" />
         <module name="spring_04_autowired" />
         <module name="spring_02_hellospring" />
+        <module name="spring_11_transaction" />
         <module name="spring_09_aop" />
         <module name="spring_03_person" />
         <module name="spring_05_annotation" />

@@ -21,7 +21,7 @@
     <!--sqlSessionFactory-->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource" />
-        <!--绑定 mybatis 配置文件-->
+        <!--绑定 mybatis 配置文件，配置mapper-->
         <property name="configLocation" value="classpath:mybatis_config.xml"/>
         <property name="mapperLocations" value="classpath:com/cyd/mapper/*.xml"/>
     </bean>
@@ -32,9 +32,14 @@
         <constructor-arg index="0" ref="sqlSessionFactory"/>
     </bean>
 
-    <!--注入实现类-->
+    <!--set方法：注入实现类-->
     <bean id="userMapper" class="com.cyd.mapper.UserMapperImpl">
         <property name="sqlSessionTemplate" ref="sqlSessionTemplate"/>
+    </bean>
+
+    <!--support 方法只需要把父类的 Factory注入即可，不需要生成template-->
+    <bean id="userMapper2" class="com.cyd.mapper.UserMapperImpl2">
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
     </bean>
 
     <!--开启注解支持-->

@@ -2,10 +2,13 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         https://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/aop
-        http://www.springframework.org/schema/aop/spring-aop.xsd">
+        http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd">
 
     <!--DataSource：使用 spring 的数据源替换 mybatis 的配置 c3p0 dbcp druid
         这里使用 spring 提供的 jdbc
@@ -37,10 +40,28 @@
         <property name="sqlSessionTemplate" ref="sqlSessionTemplate"/>
     </bean>
 
-    <!--support 方法只需要把父类的 Factory注入即可，不需要生成template-->
-    <bean id="userMapper2" class="com.cyd.mapper.UserMapperImpl2">
-        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    <!--配置声明式事务-->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <constructor-arg ref="dataSource" />
     </bean>
+    <!--结合 aop 实现事务的织入 -->
+    <!--配置事务的类，下面那句话是固定的-->
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <!--给哪些方法配置事务-->
+        <!--配置事务的传播特性：propagation-->
+        <tx:attributes>
+            <tx:method name="add" propagation="REQUIRED"/>
+            <tx:method name="delete" propagation="REQUIRED"/>
+            <tx:method name="update" propagation="REQUIRED"/>
+            <tx:method name="query" read-only="true"/>
+            <tx:method name="*" propagation="REQUIRED"/>
+        </tx:attributes>
+    </tx:advice>
+    <!--配置事务的切入-->
+    <aop:config>
+        <aop:pointcut id="txPointCut" expression="execution(* com.cyd.mapper.*.*(..))"/>
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="txPointCut"/>
+    </aop:config>
 
     <!--开启注解支持-->
     <aop:aspectj-autoproxy/>

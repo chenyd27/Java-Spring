@@ -18,6 +18,7 @@
         <module>spring_08_proxy</module>
         <module>spring_09_aop</module>
         <module>spring_10_Mybatis</module>
+        <module>spring_11_transaction</module>
     </modules>
     <dependencies>
         <!-- https://mvnrepository.com/artifact/org.springframework/spring-webmvc -->
